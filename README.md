@@ -3,7 +3,7 @@
 
 ---
 
-> ### We live in a world where we experience needless delays due to never-ending traffic jams. However, what if this could be avoided?
+> ### We live in a world where we experience needless ~~delays~~ due to never-ending ~~traffic jams~~. However, what if this could be avoided?
 > 
 > ---
 > 
