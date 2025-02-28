@@ -20,7 +20,7 @@
 
 ## Developers:
 - [Sara Alić-Ekinović](https://is.cuni.cz/studium/kdojekdo/index.php?id=3cc50146043f2df7ad0f50fb51f5ed9d&tid=&do=hledani&koho=s&fakulta=11320&prijmeni=Ali%C4%87-Ekinovi%C4%87&ch_prijmeni=0&jmeno=Sara&login=&sidos=&r_zacatek=Z&ch_diakritika=0&ch_translit=0&sustav=&stupr_mode=text&stupr=&sobor_mode=text&sims_mode=text&predm=&rozvrh=&rozvrh_stud=&sdruh=&svyjazyk=&pocet=50&vyhledej=Vyhledej)
-- [Samuel Lipovský](https://is.cuni.cz/studium/kdojekdo/index.php?id=3cc50146043f2df7ad0f50fb51f5ed9d&tid=&do=hledani&koho=s&fakulta=11320&prijmeni=Lipovsk%C3%BD&ch_prijmeni=0&jmeno=Samuel&login=&sidos=&r_zacatek=Z&ch_diakritika=0&ch_translit=0&sustav=&stupr_mode=text&stupr=&sobor_mode=text&sims_mode=text&predm=&rozvrh=&rozvrh_stud=&sdruh=&svyjazyk=&pocet=50&vyhledej=Vyhledej)
+- [Samuel Lipovský](https://is.cuni.cz/studium/kdojekdo/index.php?do=detail&si=789500)
 - [Timotej Kotlín](https://is.cuni.cz/studium/kdojekdo/index.php?id=3cc50146043f2df7ad0f50fb51f5ed9d&tid=1&do=detail&si=789479)
 
 ---
