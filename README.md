@@ -36,5 +36,7 @@
 
 ---
 
+## Event storming results:
+[Event Brainstorming](Event_storming.jpg)
 
 
