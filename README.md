@@ -37,6 +37,6 @@
 ---
 
 ## Event storming results:
-[Event Brainstorming](Event_storming.jpg)
+[Event Brainstorming](Event_Storming.jpg)
 
 
