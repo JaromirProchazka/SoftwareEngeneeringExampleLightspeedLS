@@ -15,6 +15,7 @@
 - [Developers](#developers)
 - [Status](#status)
 - [Licensing](#licensing)
+- [Event Storming](#event-storming-results)
 
 ---
 
