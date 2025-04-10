@@ -12,6 +12,3 @@ assignees: ''
 **_I want_**  . 
 
 **_So that_** .
-
-
-*_Related Use Case:_*
