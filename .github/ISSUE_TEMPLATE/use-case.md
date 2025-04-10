@@ -10,7 +10,7 @@ assignees: ''
 
 *_Title:_*
 *_Actors:_*
-*_Preconditions:_*
+*_Pre-conditions:_*
 
 *_Basic flow:_*
 *_Alternative flows:_*
