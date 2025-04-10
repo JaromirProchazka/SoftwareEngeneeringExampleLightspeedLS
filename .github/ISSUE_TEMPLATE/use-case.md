@@ -15,4 +15,4 @@ assignees: ''
 *_Basic flow:_*
 *_Alternative flows:_*
 
-*_Postconditions:_*
+*_Post-conditions:_*
