@@ -15,19 +15,19 @@ rectangle "LightSpeed App" {
     usecase "Select Green Route"                              as UC_Green
     usecase "Filter Wheelchair\nAccessible Routes"            as UC_Wheel
 
-    UC_FilterTransport .> UC_Search : <<extend>>
-    UC_Green            .> UC_Search : <<extend>>
-    UC_Wheel            .> UC_Search : <<extend>>
+    UC_FilterTransport .> UC_Search : <<extends>>
+    UC_Green            .> UC_Search : <<extends>>
+    UC_Wheel            .> UC_Search : <<extends>>
   }
 
   package "Statistics & Analytics" {
     usecase "View Travel Expenditure\nSummary"                as UC_Expenditure
-    usecase "Statistics"                                      as Stat
+    usecase "Personal Statistics"                                      as Stat
     usecase "Check Emission\nStatistics"                      as UC_Emissions
     usecase "Analyze Seasonal Travel\nPatterns"               as UC_Seasonal
 
-    UC_Expenditure .> Stat : <<extend>>
-    UC_Emissions .> Stat : <<extend>>
+    UC_Expenditure .> Stat : <<extends>>
+    UC_Emissions .> Stat : <<extends>>
   }
 }
 
