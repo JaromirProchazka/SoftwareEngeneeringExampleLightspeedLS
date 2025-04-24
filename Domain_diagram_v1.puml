@@ -1,0 +1,96 @@
+@startuml DomainDiagram
+title LS Domain Model
+skinparam classAttributeIconSize 0
+
+' Enumerations
+enum ModeOfTravel {
+  FAST
+  CHEAP
+  GREEN
+}
+enum TransportationType {
+  BUS
+  TRAM
+  METRO
+  CAR
+  BICYCLE
+  WALK
+}
+enum SearchTimeType {
+  DEPARTURE
+  ARRIVAL
+}
+
+' User hierarchy
+class User {
+  - userId: UUID
+  - name: String
+}
+class LightSpeedUser
+class DataAnalyst
+User <|-- LightSpeedUser
+User <|-- DataAnalyst
+
+' Preferences/settings
+class UserSettings {
+  - modeOfTravel: ModeOfTravel
+  - disabledAccessibleOnly: Boolean
+  - transportationTypes: List<TransportationType>
+}
+LightSpeedUser "1" -- "1" UserSettings : has
+
+' Route search session
+class RouteSearch {
+  - referenceTime: DateTime
+  - searchTimeType: SearchTimeType
+}
+LightSpeedUser "1" -- "*" RouteSearch : initiates
+
+' Route options & path segments
+class RouteOption {
+  - cost: Decimal
+  - duration: Time
+  - carbonEmission: Decimal
+  - departureTime: DateTime
+  - arrivalTime: DateTime
+}
+class PathSegment {
+  - order: Integer
+  - mode: TransportationType
+  - segmentDuration: Time
+  - segmentCost: Decimal
+  - segmentEmission: Decimal
+}
+
+RouteSearch "1" -- "*" RouteOption : finds
+RouteOption "1" -- "*" PathSegment : has
+
+' Locations
+class Location {
+  - name: String
+  - latitude: Double
+  - longitude: Double
+}
+PathSegment --> Location : startLocation
+PathSegment --> Location : endLocation
+RouteOption --> Location : destination
+
+' Expenditure summary
+class ExpenditureSummary {
+  - periodStart: Date
+  - periodEnd: Date
+  - totalSpent: Decimal
+}
+LightSpeedUser "1" -- "*" ExpenditureSummary : views
+
+' Analytics platform for data analysts
+class StatisticsPlatform
+class SeasonalTravelPatternReport {
+  - timeWindow: String
+  - routePopularityTrends: String
+  - demographicShifts: String
+}
+DataAnalyst "1" -- "1" StatisticsPlatform : uses
+StatisticsPlatform "1" -- "*" SeasonalTravelPatternReport : produces
+
+@enduml

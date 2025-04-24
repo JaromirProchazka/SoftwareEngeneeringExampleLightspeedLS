@@ -1,0 +1,126 @@
+@startuml Domain_diagram
+title LS Domain Model
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+
+'=== Enumerations ===
+enum ModeOfTravel {
+  FAST
+  CHEAP
+  GREEN
+}
+enum TransportationType {
+  BUS
+  TRAM
+  METRO
+  CAR
+  BICYCLE
+  WALK
+}
+enum SearchTimeType {
+  DEPARTURE
+  ARRIVAL
+}
+
+'=== Users ===
+class User {
+  + userId: UUID
+  + name: String
+}
+class LightSpeedUser
+class DataAnalyst
+
+User <|-- LightSpeedUser
+User <|-- DataAnalyst
+
+'=== Settings & Search ===
+class UserSettings {
+  + modeOfTravel: ModeOfTravel
+  + wheelchairAccessibleOnly: Boolean
+  + transportationTypes: List<TransportationType>
+}
+LightSpeedUser "1" -- "1" UserSettings : has
+
+class RouteSearch {
+  + referenceTime: DateTime
+  + timeType: SearchTimeType
+}
+LightSpeedUser "1" -- "*" RouteSearch : initiates
+
+'=== Route Options & Segments ===
+class RouteOption {
+  + cost: Decimal
+  + duration: Time
+  + carbonEmission: Decimal
+  + departureTime: DateTime
+  + arrivalTime: DateTime
+}
+RouteSearch "1" -- "*" RouteOption : finds
+
+class PathSegment {
+  + order: Integer
+  + mode: TransportationType
+  + segmentDuration: Time
+  + segmentCost: Decimal
+  + segmentEmission: Decimal
+}
+RouteOption "1" -- "*" PathSegment : composedOf
+
+class Location {
+  + locationId: UUID
+  + name: String
+  + latitude: Double
+  + longitude: Double
+}
+PathSegment "*" --> "1" Location : startLocation
+PathSegment "*" --> "1" Location : endLocation
+RouteOption "*" --> "1" Location : destination
+
+'=== Filters as Association-Classes ===
+abstract class RouteFilter {
+  + filterName: String
+}
+class GreenFilter
+class WheelchairFilter
+class TransportTypeFilter
+
+RouteFilter <|-- GreenFilter
+RouteFilter <|-- WheelchairFilter
+RouteFilter <|-- TransportTypeFilter
+
+' A search may apply multiple filters
+RouteSearch "1" -- "*" RouteFilter : applies
+
+'=== Spending & Personal Stats ===
+class PersonalStatistics {
+  + generatedAt: DateTime
+}
+class EmissionStatistics extends PersonalStatistics
+class ExpenditureSummary extends PersonalStatistics {
+  + periodStart: Date
+  + periodEnd: Date
+  + totalSpent: Decimal
+}
+
+LightSpeedUser "1" -- "*" PersonalStatistics : views
+
+'=== Analytics Platform & Reports ===
+class StatisticsPlatform {
+  + platformId: UUID
+}
+class SeasonalTrendsModule {
+  + timeWindow: String
+  + region: String
+  + ageGroup: String
+  + timeOfDay: String
+}
+class SeasonalTravelPatternReport {
+  + popularityTrend: String
+  + demographicShift: String
+}
+
+DataAnalyst "1" -- "1" StatisticsPlatform : uses
+StatisticsPlatform "1" -- "*" SeasonalTrendsModule : offers
+SeasonalTrendsModule "1" -- "*" SeasonalTravelPatternReport : produces
+
+@enduml
