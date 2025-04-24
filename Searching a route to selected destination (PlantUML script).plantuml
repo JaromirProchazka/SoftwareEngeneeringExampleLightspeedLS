@@ -1,0 +1,64 @@
+@startuml
+title Searching a route to selected destination
+start
+note right
+  Pre-conditions:
+  – Logged in  
+  – On default search homepage  
+  – Knows desired destination  
+end note
+
+rectangle "Starting point selection" {
+  :Prompt to select starting point;
+  
+  if (Select “Current location” as start?) then (yes)
+    :Acquire GPS and set as starting point;
+  else (no)
+    :Enter starting point;
+    :Show matching start points on map;
+    :Select a starting point;
+  endif
+}
+
+rectangle "Destination selection" {
+  :Prompt to select destination;
+  
+  if (Select “Current location” as destination?) then (yes)
+    :Acquire GPS and set as destination;
+  else (no)
+    :Enter destination;
+    :Show matching destinations on map;
+    :Select a destination;
+  endif
+}
+
+rectangle "Route search" {
+  rectangle "Route preferences" {
+    :Go to route options page;
+    :Select travel preferences;
+    :System searches for routes;
+    :Show connections filtered by arrival time;
+    :Select preferred route;
+  }
+  rectangle "Payment" {
+    :Calculate cost;
+    
+    :Show payment options pop-up;
+    :Select payment option;
+    
+    :Go to payment page;
+    :Enter payment data;
+    :Click Pay;
+    :System validates payment;
+    :System processes transaction;
+  }
+}
+  
+  :Go to Travel Overview page;
+  stop
+
+note left
+  Post-condition:
+  – User sees route overview on Travel Overview page
+end note
+@enduml
