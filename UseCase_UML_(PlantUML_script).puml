@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Green User"             as GreenU
+actor "Disabled User"          as DisabledUser
+actor "LightSpeed User"        as User
+actor "Data Analyst"           as Analyst
+
+rectangle "LightSpeed App" {
+  
+  package "Route Search" {
+    usecase "Search a Route to\nSelected Destination"         as UC_Search
+    usecase "Filter Transportation\nTypes"                    as UC_FilterTransport
+    usecase "Select Green Route"                              as UC_Green
+    usecase "Filter Wheelchair\nAccessible Routes"            as UC_Wheel
+
+    UC_FilterTransport .> UC_Search : <<extend>>
+    UC_Green            .> UC_Search : <<extend>>
+    UC_Wheel            .> UC_Search : <<extend>>
+  }
+
+  package "Statistics & Analytics" {
+    usecase "View Travel Expenditure\nSummary"                as UC_Expenditure
+    usecase "Statistics"                                      as Stat
+    usecase "Check Emission\nStatistics"                      as UC_Emissions
+    usecase "Analyze Seasonal Travel\nPatterns"               as UC_Seasonal
+
+    UC_Expenditure .> Stat : <<extend>>
+    UC_Emissions .> Stat : <<extend>>
+  }
+}
+
+' Actor→UseCase links
+User          --> UC_Search
+User          --> UC_Expenditure
+User          --> Stat
+User          --> UC_Emissions
+User          --> UC_FilterTransport
+GreenU         --> UC_Green
+DisabledUser  --> UC_Wheel
+Analyst       --> UC_Seasonal
+
+@enduml
