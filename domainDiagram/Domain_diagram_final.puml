@@ -1,159 +1,184 @@
-@startuml domain_model_expanded
-title LightSpeed Domain Model 
+@startuml domain_model_final
+title LightSpeed Domain Model
+
 skinparam classAttributeIconSize 0
-skinparam packageStyle rectangle
+skinparam packageStyle circle
+skinparam linetype ortho
+skinparam nodesep 80
+skinparam ranksep 100
 
-'=== Core Universals (Classes) ===
-class Traveler {
-  + name : String
-  + wheelchairAccessibleOnly : Boolean
-  + preferredModes : List<TransportationType>
+'=== Packages with manual background colors ===
+
+package "Enumerations" #F9EBEA {
+  enum ModeOfTravel {
+    FAST
+    CHEAP
+    GREEN
+  }
+
+  enum TransportationType {
+    BUS
+    TRAM
+    METRO
+    CAR
+    BICYCLE
+    WALK
+  }
+
+  enum SearchTimeType {
+    DEPARTURE
+    ARRIVAL
+  }
 }
 
-class UserSettings {
-  + preferredMode : ModeOfTravel
-  + preferredTransportTypes : List<TransportationType>
+package "User Layer" #FFF5CC {
+  class Traveler {
+    + name : String
+    + wheelchairAccessibleOnly : Boolean
+    + preferredModes : List<TransportationType>
+  }
+
+  class UserSettings {
+    + preferredMode : ModeOfTravel
+    + preferredTransportTypes : List<TransportationType>
+  }
 }
 
-class DataAnalyst {
-  + name : String
+package "Search and Travel" #E8DAEF {
+  class TravelSearch {
+    + referenceTime : DateTime
+    + timeType : SearchTimeType
+  }
+
+  class TravelAlternative {
+    + totalDuration : Time
+    + totalCost : Decimal
+    + totalCarbonEmission : Decimal
+    + departureTime : DateTime
+    + arrivalTime : DateTime
+  }
+
+  class TravelSegment {
+    + sequenceOrder : Integer
+    + transportMode : TransportationType
+    + duration : Time
+    + cost : Decimal
+    + emission : Decimal
+  }
+
+  abstract class RouteFilter {
+    + filterType : String
+  }
+
+  class GreenFilter
+  class AccessibilityFilter
+  class TransportTypeFilter
 }
 
-class Stop {
-  + name : String
-  + latitude : Double
-  + longitude : Double
-  + transportationTypes : List<TransportationType>
+package "Real World Entities" #D5F5E3 {
+  class Stop {
+    + name : String
+    + latitude : Double
+    + longitude : Double
+    + transportationTypes : List<TransportationType>
+  }
+
+  class Location {
+    + name : String
+    + latitude : Double
+    + longitude : Double
+  }
+
+  class Vehicle {
+    + vehicleNumber : String
+    + type : TransportationType
+  }
+
+  class VehicleLocationUpdate {
+    + timestamp : DateTime
+    + delayInSeconds : Integer
+  }
+
+  class ExternalTransportationSystem {
+    + name : String
+  }
 }
 
-class Location {
-  + name : String
-  + latitude : Double
-  + longitude : Double
+package "Platform Management" #D6EAF8 {
+  class LightSpeedPlatform {
+    + platformId : String
+    + name : String
+  }
+
+  class SeasonalTrendReport {
+    + season : String
+    + demographicInfo : String
+  }
 }
 
-class TravelSearch {
-  + referenceTime : DateTime
-  + timeType : SearchTimeType
+package "Analytics" #FADBD8 {
+  class DataAnalyst {
+    + name : String
+  }
+
+  class PersonalStatistics {
+    + generatedAt : DateTime
+  }
+
+  class EmissionStatistics {
+    + carbonSaved : Decimal
+  }
+
+  class SpendingSummary {
+    + totalSpent : Decimal
+    + periodStart : Date
+    + periodEnd : Date
+  }
 }
 
-class TravelAlternative {
-  + totalDuration : Time
-  + totalCost : Decimal
-  + totalCarbonEmission : Decimal
-  + departureTime : DateTime
-  + arrivalTime : DateTime
-}
-
-class TravelSegment {
-  + sequenceOrder : Integer
-  + transportMode : TransportationType
-  + duration : Time
-  + cost : Decimal
-  + emission : Decimal
-}
-
-class RealWorldVehicle {
-  + vehicleNumber : String
-  + type : TransportationType
-}
-
-class VehicleLocationUpdate {
-  + timestamp : DateTime
-  + delayInSeconds : Integer
-}
-
-class ExternalTransportationSystem {
-  + name : String
-}
-
-class PersonalStatistics {
-  + generatedAt : DateTime
-}
-
-class EmissionStatistics {
-  + carbonSaved : Decimal
-}
-
-class SpendingSummary {
-  + totalSpent : Decimal
-  + periodStart : Date
-  + periodEnd : Date
-}
-
-class SeasonalTrendReport {
-  + season : String
-  + demographicInfo : String
-}
-
-class RouteFilter {
-  + filterType : String
-}
-
-class GreenFilter
-class AccessibilityFilter
-class TransportTypeFilter
-
-'=== Enums ===
-enum ModeOfTravel {
-  FAST
-  CHEAP
-  GREEN
-}
-enum TransportationType {
-  BUS
-  TRAM
-  METRO
-  CAR
-  BICYCLE
-  WALK
-}
-enum SearchTimeType {
-  DEPARTURE
-  ARRIVAL
-}
-
-'=== Relations and Associations ===
-
-'--- Users ---
-Traveler "1" -- "1" UserSettings : configures
-Traveler "1" -- "*" TravelSearch : initiates
-Traveler "1" -- "*" PersonalStatistics : views
-DataAnalyst "1" -- "*" SeasonalTrendReport : produces
-
-'--- Search and Results ---
-TravelSearch "1" -- "*" TravelAlternative : returns
-TravelSearch "1" -- "*" RouteFilter : applies
-
+'=== Specializations ===
 RouteFilter <|-- GreenFilter
 RouteFilter <|-- AccessibilityFilter
 RouteFilter <|-- TransportTypeFilter
-
-'--- Alternatives and Segments ---
-TravelAlternative "1" -- "*" TravelSegment : composedOf
-
-'--- Segments and Stops ---
-TravelSegment "*" --> "1" Stop : startAt
-TravelSegment "*" --> "1" Stop : endAt
-
-'--- Real World Entities ---
-ExternalTransportationSystem "1" -- "*" RealWorldVehicle : operates
-ExternalTransportationSystem "1" -- "*" VehicleLocationUpdate : sendsUpdate
-
-RealWorldVehicle "*" -- "*" Stop : serves
-RealWorldVehicle "1" -- "*" VehicleLocationUpdate : positionUpdatedBy
-
-'--- Vehicle updates impact travel ---
-VehicleLocationUpdate "1" --> "*" TravelAlternative : affects
-
-'--- Travelers interact with Stops ---
-Traveler "*" -- "*" Stop : boardsAt
-
-'--- Locations generalize Stops ---
 Stop --|> Location
-
-'--- Personal Statistics Specializations ---
 PersonalStatistics <|-- EmissionStatistics
 PersonalStatistics <|-- SpendingSummary
+
+'=== Relations (Associations and Aggregations) ===
+
+'--- User side ---
+Traveler "1" *-- "1" UserSettings : configures
+Traveler "1" o-- "*" TravelSearch : initiates
+Traveler "1" o-- "*" TravelAlternative : selects
+Traveler "1" o-- "*" PersonalStatistics : views
+Traveler "*" o-- "*" Stop : boardsAt
+
+'--- Search side ---
+TravelSearch "1" *-- "*" TravelAlternative : proposes
+TravelSearch "1" -- "*" RouteFilter : applies
+
+'--- Travel Alternatives side ---
+TravelAlternative "1" *-- "*" TravelSegment : consistsOf
+TravelSegment "*" --> "1" Stop : startsAt
+TravelSegment "*" --> "1" Stop : endsAt
+
+'--- Vehicles and Real World ---
+ExternalTransportationSystem "1" *-- "*" Vehicle : operates
+ExternalTransportationSystem "1" o-- "*" VehicleLocationUpdate : provides
+Vehicle "*" o-- "*" Stop : serves
+Vehicle "1" o-- "*" VehicleLocationUpdate : trackedBy
+VehicleLocationUpdate "1" --> "*" TravelAlternative : affectsTiming
+
+'--- Platform side ---
+LightSpeedPlatform "1" o-- "*" Traveler : supports
+LightSpeedPlatform "1" o-- "*" TravelSearch : enablesSearch
+LightSpeedPlatform "1" o-- "*" TravelAlternative : managesAlternatives
+LightSpeedPlatform "1" o-- "*" VehicleLocationUpdate : processesUpdates
+LightSpeedPlatform "1" o-- "*" Stop : maintainsStops
+LightSpeedPlatform "1" o-- "*" SeasonalTrendReport : generatesReports
+
+'--- Analytics side ---
+DataAnalyst "1" -- "1" LightSpeedPlatform : usesPlatform
+DataAnalyst "1" o-- "*" SeasonalTrendReport : analyzesReports
 
 @enduml
