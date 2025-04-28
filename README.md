@@ -28,7 +28,7 @@
 
 ## Status:
 - Ongoing
-- Early stages of development
+- Check out our progress [here](LightSpeed.pptx)
 
 ---
 
