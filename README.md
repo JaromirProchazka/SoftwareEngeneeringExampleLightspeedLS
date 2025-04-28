@@ -29,6 +29,7 @@
 ## Status:
 - Ongoing
 - Check out our progress [here](LightSpeed.pptx)
+- For more info -> go to our [Wiki]()
 
 ---
 
