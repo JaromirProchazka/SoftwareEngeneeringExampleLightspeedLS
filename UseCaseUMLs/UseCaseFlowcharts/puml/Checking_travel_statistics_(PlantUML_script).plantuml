@@ -1,0 +1,28 @@
+@startuml
+title Checking travelling statistics
+start
+note right
+  Pre-conditions:
+  – Logged in  
+  – On default search homepage  
+  – Wants to check statistics  
+end note
+
+rectangle "Navigating to statistics" {
+  :Go to profile;
+  :System displays profile options dropdown;
+  :Go to statistics tab;
+  :System displays statistics tab;
+}
+
+rectangle "Statistics tab" {
+  :Select desired statistics;
+  :System displays filtered statistics;
+}
+
+stop
+note left
+  Post-condition:
+  – User sees filtered statistics
+end note
+@enduml
