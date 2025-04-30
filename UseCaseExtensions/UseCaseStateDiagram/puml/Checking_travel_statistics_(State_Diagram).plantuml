@@ -1,0 +1,7 @@
+@startuml
+[*] --> HomePage
+HomePage --> Preferences : profile()
+Preferences --> HomePage : back()
+Preferences --> Statistics : statistics()
+Statistics --> Preferences : back()
+@enduml
