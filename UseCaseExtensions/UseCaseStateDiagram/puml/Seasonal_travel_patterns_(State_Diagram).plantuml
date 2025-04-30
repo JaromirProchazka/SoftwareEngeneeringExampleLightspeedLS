@@ -1,0 +1,7 @@
+@startuml
+[*] --> HomePage
+HomePage --> Data_Selection : data()
+Data_Selection --> Seasonal_Trends : seasonal_trends()
+Data_Selection --> HomePage : back()
+Seasonal_Trends --> Data_Selection : back()
+@enduml

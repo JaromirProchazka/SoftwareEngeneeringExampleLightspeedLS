@@ -1,0 +1,13 @@
+@startuml
+[*] --> HomePage
+HomePage --> Start_Selection : search()
+Start_Selection --> Destination_Selection : search()
+Start_Selection --> HomePage : cancel()
+Destination_Selection --> Route_Selection : select()
+Destination_Selection --> Start_Selection : cancel()
+Route_Selection --> Payment : select()
+Route_Selection --> Destination_Selection : cancel()
+Payment --> Payment_Confirmation: paid()
+Payment_Confirmation --> HomePage : timeout()
+Payment --> Route_Selection : cancel()
+@enduml
