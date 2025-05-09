@@ -1,7 +1,6 @@
 ---
 name: Use Case
-about: Describes the expected interaction between user and software to achieve needed
-  goal
+about: Unified use case template
 title: ''
 labels: use case
 assignees: ''
