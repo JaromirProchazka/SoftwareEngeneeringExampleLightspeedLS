@@ -8,10 +8,11 @@ assignees: ''
 ---
 
 _Related requirement/User story_:
-_Test Objective_:
 _Preconditions_:
 
-? _Priority_:
+_Test Objective_:
 
+
+? _Priority_:
 
 _PS: This is just a recommended template to make your job easier, however we are not sure that this is the format required and/or accepted by the course NSWI041_
