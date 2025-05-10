@@ -7,17 +7,22 @@ assignees: ''
 
 ---
 
-_Linked test condition(s)_: 
+(Optional) _ID_:
 
-_Preconditions_:
- _Test data_: 
-_Role_: 
 _Priority_: 
 
-| _Test steps_ |_Action_|_Expected result_|_Actual result_|
-|---|---|---|---|
-| 1. |  |  |  |
-| 2. |  |  |  |
-| 3. |  |  |  |
-| 4. |  |  |  |
-| 5. |  |  |  |
+_Preconditions_:
+_Postconditions_:
+
+_Role_: 
+ _Test data_: 
+_Covered test condition(s)_: 
+
+|_Test steps_|
+| # |_Action_|_Expected result_|_Actual result_| _Notes_|
+|---|---|---|---|---|
+| 1. |  |  |  |  |
+| 2. |  |  |  |  |
+| 3. |  |  |  |  |
+| 4. |  |  |  |  |
+| 5. |  |  |  |  |
