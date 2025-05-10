@@ -7,19 +7,17 @@ assignees: ''
 
 ---
 
-_Linked test condition(s)_: Issue #num. 
+_Linked test condition(s)_: 
+
 _Preconditions_:
-? _Test data_:
+ _Test data_: 
+_Role_: 
+_Priority_: 
 
-_Test steps_:
-1. 
-2. 
-...
-
-_Expected result_:
-_Actual result_:
-
-_Status_:
-? _Environment_:
-
-_PS: This is just a recommended template to make your job easier, however we are not sure that this is the format required and/or accepted by the course NSWI041_
+| _Test steps_ |_Action_|_Expected result_|_Actual result_|
+|---|---|---|---|
+| 1. |  |  |  |
+| 2. |  |  |  |
+| 3. |  |  |  |
+| 4. |  |  |  |
+| 5. |  |  |  |
