@@ -2,7 +2,7 @@
 name: Test Case
 about: Unified test case template
 title: Test Case
-labels: test case
+labels: test case, user story
 assignees: ''
 
 ---
