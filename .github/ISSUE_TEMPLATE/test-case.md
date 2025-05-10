@@ -18,7 +18,7 @@ _Role_:
  _Test data_: 
 _Covered test condition(s)_: 
 
-|_Test steps_|
+_Test steps_:
 | # |_Action_|_Expected result_|_Actual result_| _Notes_|
 |---|---|---|---|---|
 | 1. |  |  |  |  |
