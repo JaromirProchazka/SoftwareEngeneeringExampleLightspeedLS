@@ -3,6 +3,8 @@
 
 ---
 
+## Vision
+
 > ### We live in a world where we experience needless ~~delays~~ due to never-ending ~~traffic jams~~. However, what if this could be avoided?
 > 
 > ---
@@ -30,6 +32,28 @@
 - Ongoing
 - Check out our progress [here](LightSpeed.pptx)
 - For more info → go to our [Wiki](https://github.com/aliekins/Lightspeed_LS/wiki)
+
+---
+
+## Set up Automating testig Set up
+
+Activate virtual environment with
+
+```
+$ .\.env\Scripts\activate
+```
+
+### Whole install process
+
+For Windows: 
+
+```
+py -m venv .env
+.\.env\Scripts\activate
+pip install robotframework-browser
+pip list
+rfbrowser init
+```
 
 ---
 
